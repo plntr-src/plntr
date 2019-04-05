@@ -1,2 +1,2 @@
-# pltr
+# pltnr
 The plant resource
