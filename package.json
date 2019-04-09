@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "express-pino-logger": "^4.0.0",
+    "node-env-run": "^3.0.2",
     "nodemon": "^1.18.11",
+    "npm-run-all": "^4.1.5",
+    "pino-colada": "^1.4.4",
     "react-scripts": "2.1.8"
   },
   "dependencies": {
@@ -20,9 +24,12 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "gathr": "node-env-run plntrbase.js --exec nodemon | pino-colada",
+    "dev": "run-p gathr start",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy": "http://localhost:3001",
   "eslintConfig": {
     "extends": "react-app"
   },
