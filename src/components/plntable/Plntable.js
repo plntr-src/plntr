@@ -28,7 +28,7 @@ export const Plntable = (/**  search data from App  */) => {
       </thead>
       <tbody>
         {
-          // insert data
+          // insert data putPlntsOnTable(plnts)
         }
       </tbody>
     </table>  
