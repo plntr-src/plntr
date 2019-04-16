@@ -23,7 +23,7 @@ export default class ForageBar extends React.Component {
   
   render() {
     return (
-      <div>
+      <div className="forage-bar">
         <Menu />
         <form onSubmit={this.handleSubmit}>
           <label>

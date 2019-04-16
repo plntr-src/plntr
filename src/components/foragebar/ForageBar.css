@@ -1,0 +1,16 @@
+.forage-bar {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+select {
+    position: relative;
+    display: inline-block;
+}
+
+form {
+    position: relative;
+    display: inline-block;
+}
