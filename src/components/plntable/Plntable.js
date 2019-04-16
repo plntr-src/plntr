@@ -1,7 +1,7 @@
 import React from 'react';
-import 'plntable.css';
+import './plntable.css';
 
-export default Plntable = (/**  search data from App  */) => {
+export const Plntable = (/**  search data from App  */) => {
 
   const headers = [
     "Genus",
@@ -19,10 +19,18 @@ export default Plntable = (/**  search data from App  */) => {
 
   return (
     <table className="plntable" >
-      <tr>{ this.state.headers.map( header => <th>{ header }</th> ) }</tr>
-      {
-        // insert data
-      }
+      <thead>
+        <tr>
+        { 
+          headers.map( (header, i) => <th key={i}>{ header }</th> ) 
+        }
+        </tr>
+      </thead>
+      <tbody>
+        {
+          // insert data
+        }
+      </tbody>
     </table>  
   )
 }

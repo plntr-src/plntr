@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import { Plntable } from './components/plntable/Plntable.js';
+
 class App extends Component {
 
 
@@ -25,6 +27,14 @@ class App extends Component {
   //     </div>
   //   );
   // }
+
+  render () {
+    return (
+      <div>
+        <Plntable />
+      </div>
+    )
+  }
 }
 
 export default App;
