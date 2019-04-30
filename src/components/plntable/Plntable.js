@@ -2,7 +2,7 @@ import React from 'react';
 import './plntable.css';
 import { categories } from '../constants';
 
-export const Plntable = (/**  search data from App  */) => {
+export const Plntable = (data, cols) => {
 
   const putPlntsOnTable = (plnts) => {
     return plnts.map( (plnt, i) => <td className="row" key={i} >{ /** plnt data */ }</td> )
@@ -13,13 +13,13 @@ export const Plntable = (/**  search data from App  */) => {
       <thead>
         <tr>
         { 
-          categories.map( (header, i) => <th key={i}>{ header }</th> ) 
+          cols.map( (header, i) => <th key={i}>{ header }</th> ) 
         }
         </tr>
       </thead>
       <tbody>
         {
-          // insert data putPlntsOnTable(plnts)
+          putPlntsOnTable(data)
         }
       </tbody>
     </table>  

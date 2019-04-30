@@ -18,6 +18,18 @@ app.get('/', function (_req, res) {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+app.get('/forage', (_req, res) => {
+ console.log('searching: ', /** query */);
+});
+
+app.post('/add', (_req, res) => {
+  console.log('add plnt');
+});
+
+app.get('/sort', (_req, res) => {
+  console.log('sort data');
+});
+
 app.listen(3001, () =>
   console.log('Express server is running on localhost:3001')
 );

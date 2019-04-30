@@ -2,12 +2,12 @@ import React from 'react';
 import './foragebar.css';
 import { categories } from '../constants';
 
-const Menu = () => {
+const Menu = cols => {
 
   return (
     <select>
       {
-        categories.map((option, i) => <option>{ option }</option>)
+        cols.map((option, i) => <option>{ option }</option>)
       }
     </select>
   )
