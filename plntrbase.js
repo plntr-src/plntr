@@ -18,9 +18,24 @@ app.get('/', function (_req, res) {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+
+var testData = require('./src/dummydata/forageData.json');
+var cols = require('./src/dummydata/cols.json');
+
+app.get('/cols', (_req, res) => {
+  return res.send(cols);
+})
+
 app.get('/forage', (_req, res) => {
- console.log('searching: ', /** query */);
+ return res.send(testData);
 });
+
+app.get('/search', (_req, res) => {
+  console.log(
+    'searching for: ',
+    
+  )
+})
 
 app.post('/add', (_req, res) => {
   console.log('add plnt');

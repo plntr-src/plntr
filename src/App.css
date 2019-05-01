@@ -1,6 +1,12 @@
 .App {
   text-align: center;
 }
+
+.plntrplot {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
 /* 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;

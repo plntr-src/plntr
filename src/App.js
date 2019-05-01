@@ -18,14 +18,36 @@ class App extends Component {
     this.updateData.bind(this);
   }
 
+  async fetchDataOnMount() {
+    return await fetch("/forage")
+      .then(res => res.json())
+      .then(json => {
+        console.log('fetched forage data', json)
+        return json
+      });
+  }
+
+  async fetchColsOnMount() {
+    return await fetch("/cols")
+      .then(response => response.json())
+      .then(json => {
+        console.log('fetched cols data: ', json)
+        return json
+      });
+  }
+
   componentWillMount() {
     // get plnt data
-    const setTable = await fetch("/").then(data => { 
-      this.setState({data})
-     });
-    const getCols = await fetch("/cols").then(cols => {
-      this.setState({cols})
-    });
+    Promise.all([
+      this.fetchDataOnMount(),
+      this.fetchColsOnMount()
+    ]).then((dataAndCols) => {
+      console.log('d and c: ', dataAndCols);
+      this.setState({
+        data: dataAndCols[0],
+        cols: dataAndCols[1]
+      })
+    })
   }
 
   updateData(newData) {
@@ -35,8 +57,9 @@ class App extends Component {
   }
 
   render () {
-    if (this.state.data.length === 0) {
-      return <div />
+    console.log('this state: ', this.state);
+    if (this.state.data.length === 0 && this.state.cols.length === 0) {
+      return <div>tesst</div>
     }
 
     let { cols, data } = this.state;
@@ -52,7 +75,7 @@ class App extends Component {
     }
 
     return (
-      <div>
+      <div className="plntrplot">
         <ForageBar { ...forageBarProps } />
         <Plntable { ...plntableProps } />
       </div>

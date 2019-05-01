@@ -1,10 +1,15 @@
 import React from 'react';
+import Button from 'react-bootstrap/Button';
+
 import Menu from './Menu';
+import './foragebar.css';
 
 export default class ForageBar extends React.Component {
   constructor(props) {
     super(props);
+    console.log('forage bar props: ', props);
     this.state = {
+      cols: props.cols,
       value: ''
     }
   
@@ -26,15 +31,27 @@ export default class ForageBar extends React.Component {
   }
   
   render() {
+
+    let boxStyle = {
+      textAlign: "center",
+      paddingLeft: "0px",
+      width: "80%"
+    }
+
+    if (this.state.value.length > 0) {
+      boxStyle.textAlign = "left"
+      boxStyle.paddingLeft = "2vw"
+      boxStyle.width = "75.5%"
+    }
+
     return (
       <div className="forage-bar">
-        <Menu cols />
+        <Menu cols={ this.state.cols } />
         <form onSubmit={this.handleSubmit}>
           <label>
-            Name:
-            <input type="text" value={this.state.value} onChange={this.handleChange} />
+            <input className="forage-box" style={ boxStyle } placeholder="Roses are red, violets are blue, but what aboot dis plnt?" type="text" value={this.state.value} onChange={this.handleChange} />
           </label>
-          <input type="submit" value="Forage" />
+          <button className="forage-btn" type="submit" value=""><img className="forage-icon" /></button>
         </form>
       </div>
     )

@@ -2,7 +2,7 @@ import React from 'react';
 import './plntable.css';
 import { categories } from '../constants';
 
-export const Plntable = (data, cols) => {
+export const Plntable = props => {
 
   const putPlntsOnTable = (plnts) => {
     return plnts.map( (plnt, i) => <td className="row" key={i} >{ /** plnt data */ }</td> )
@@ -13,13 +13,13 @@ export const Plntable = (data, cols) => {
       <thead>
         <tr>
         { 
-          cols.map( (header, i) => <th key={i}>{ header }</th> ) 
+          props.cols.map( (header, i) => <th key={i}>{ header }</th> ) 
         }
         </tr>
       </thead>
       <tbody>
         {
-          putPlntsOnTable(data)
+          putPlntsOnTable(props.data)
         }
       </tbody>
     </table>  
