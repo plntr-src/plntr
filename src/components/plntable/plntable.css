@@ -3,14 +3,22 @@
  height: auto;
 }
 
-.row {
-
+tr {
+    text-align: center;
+    border: 3em solid black;
 }
 
-.row:nth-child(even) {
-
+tr:nth-child(even) {
+    background-color: bisque;
 }
 
-.row:nth-child(odd) {
-    
+tr:nth-child(odd) {
+    background-color: aquamarine;
+}
+
+.plnt-img {
+    height: 10em;
+    width: 10em;
+    object-fit: cover;
+    object-position: center;
 }
