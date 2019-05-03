@@ -1,7 +1,120 @@
+
+/* book version */
+@font-face {
+  font-family: Gravity;
+  src: url("./fonts/Gravity-Book.otf");
+  font-weight: 350;
+}
+
+@font-face {
+  font-family: Gravity;
+  src: url("./fonts/Gravity-BookItalic.otf");
+  font-style: italic;
+  font-weight: 350;
+}
+
+@font-face {
+  font-family: Gravity;
+  src: url("./fonts/Gravity-BookItalic.otf");
+  font-style: oblique;
+  font-weight: 350;
+}
+
+/* bold version */
+@font-face {
+  font-family: Gravity;
+  src: url("./fonts/Gravity-Bold.otf");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: Gravity;
+  src: url("./fonts/Gravity-BoldItalic.otf");
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Gravity;
+  src: url("./fonts/Gravity-BoldItalic.otf");
+  font-weight: bold;
+  font-style: oblique;
+}
+
+/* ultra light version */
+@font-face {
+  font-family: "Gravity Ultra Light";
+  src: url("./fonts/Gravity-UltraLight.otf");
+}
+
+@font-face {
+  font-family: "Gravity Ultra Light";
+  src: url("./fonts/Gravity-UltraLightItalic.otf");
+  font-style: oblique;
+}
+
+@font-face {
+  font-family: "Gravity Ultra Light";
+  src: url("./fonts/Gravity-UltraLightItalic.otf");
+  font-style: italic;
+}
+
+/* regular version */
+@font-face {
+  font-family: Gravity;
+  src: url("./fonts/Gravity-Regular.otf");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Gravity;
+  src: url("./fonts/Gravity-Italic.otf");
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Gravity;
+  src: url("./fonts/Gravity-Italic.otf");
+  font-style: oblique;
+}
+
+/* light version */
+@font-face {
+  font-family: "Gravity Light";
+  src: url("./fonts/Gravity-Light.otf");
+}
+
+@font-face {
+  font-family: "Gravity Light";
+  src: url("./fonts/Gravity-LightItalic.otf");
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Gravity Light";
+  src: url("./fonts/Gravity-LightItalic.otf");
+  font-style: oblique;
+}
+
+@font-face {
+  font-family: "Simple Print";
+  src: url("./fonts/Simple\ Print.ttf");
+}
+
+@font-face {
+  font-family: "Dreamy Land";
+  src: url("./fonts/Dreamy\ Land\ Medium.ttf");
+}
+
+@font-face {
+  font-family: "Open Dyslexic";
+  src: url("./fonts/OpenDyslexicMono-Regular.otf");
+}
+
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  font-family: Open Dyslexic, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;

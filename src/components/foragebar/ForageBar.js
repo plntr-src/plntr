@@ -34,24 +34,21 @@ export default class ForageBar extends React.Component {
 
     let boxStyle = {
       textAlign: "center",
-      paddingLeft: "0px",
-      width: "80%"
+      width: "56em"
     }
 
     if (this.state.value.length > 0) {
       boxStyle.textAlign = "left"
-      boxStyle.paddingLeft = "2vw"
-      boxStyle.width = "75.5%"
     }
 
     return (
       <div className="forage-bar">
-        <Menu cols={ this.state.cols } />
+      <Menu cols={ this.state.cols } />
         <form onSubmit={this.handleSubmit}>
           <label>
             <input className="forage-box" style={ boxStyle } placeholder="Roses are red, violets are blue, but what aboot dis plnt?" type="text" value={this.state.value} onChange={this.handleChange} />
+            <button className="forage-btn" type="submit" value=""><img className="forage-icon" src="./assets/plntnsun.png" /></button>
           </label>
-          <button className="forage-btn" type="submit" value=""><img className="forage-icon" /></button>
         </form>
       </div>
     )

@@ -5,19 +5,12 @@
     justify-content: center;
     align-content: center;
     align-self: center;
-    max-width: 70vw;
-    height: 5vh;
+    width: 70em;
+    height: 5em;
     left: 50%;
     transform: translateX(-50%);
     padding: 5vh 5vw 5vh 5vw;
     top: 0px;
-}
-
-select {
-    position: relative;
-    display: inline-block;
-    top: 50%;
-    transform: translateY(-50%);
 }
 
 form {
@@ -25,36 +18,39 @@ form {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    width: 80%;
-    margin-left: 2vw;
+    width: 63%;
 }
 
 label {
     position: relative;
-    width: 80%;
+    display: inline-block;
+    width: 42em;
+}
+
+select {
+    position: relative;
 }
 
 .forage-box {
-    /* width: 80%; */
-    min-height: 40px;
-    top: 0px;
-    /* text-align: center; */
+    width: 56em;
+    min-height: 3.5em;
     line-height: 50%;
 }
 
 .forage-btn {
-    position: absolute;
-    right: 29%;
+    float: right;
     height: 4em;
     width: 4em;
-    top: 0px;
+    background-color: none;
+    border: none;
+    padding: 0px;
+    align-items: center;
 }
 
 .forage-icon {
-    padding-top: 0.5em;
-    height: 3em;
-    width: 3em;
-    content:url(./forageAssets/plntnsun.png);
+    position: relative;
+    height: 100%;
+    margin: auto;
     object-fit: contain;
     object-position: center;
 }
