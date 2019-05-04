@@ -30,7 +30,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "gathr": "node-env-run plntrbase.js --exec nodemon | pino-colada",
+    "gathr": "node-env-run src/server.js --exec nodemon | pino-colada",
     "dev": "run-p gathr start",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
