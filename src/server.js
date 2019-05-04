@@ -54,6 +54,15 @@ server.get('/cols', (req, res) => {
 	  })
 });
 
+server.post('/add', (req, res) => {
+});
+
+server.post('/delete', (req, res) => {
+});
+
+server.put('/edit', (req, res) => {
+});
+
 server.listen(port, () =>
-  console.log(`Example app listening on port ${port}!`),
+  console.log(`PLNTR is listening on port ${port}!`),
 );
