@@ -39,6 +39,8 @@ export default class ForageBar extends React.Component {
 
     if (this.state.value.length > 0) {
       boxStyle.textAlign = "left"
+      boxStyle.paddingLeft = "2em"
+      boxStyle.width = "54em"
     }
 
     return (
