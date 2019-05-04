@@ -23,7 +23,7 @@ class App extends Component {
       .then(res => res.json())
       .then(json => {
         console.log('fetched forage data', json)
-        return json
+        return json['body']['docs']
       });
   }
 
@@ -32,7 +32,7 @@ class App extends Component {
       .then(response => response.json())
       .then(json => {
         console.log('fetched cols data: ', json)
-        return json
+        return json['body']
       });
   }
 
