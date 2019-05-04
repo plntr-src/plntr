@@ -4,32 +4,35 @@
         "species": "annuus",
         "common_name": "common sunflower",
         "water_freq": 5,
-        "hardiness": [2,3,4,5,6,7,8,9,10,11],
-        "soil": "Moist, Loamy, Sandy",
+        "hardiness": ["2a", "2b", "3a","3b","4a","4b","5a","5b","6a","6b","7a","7b", "8a", "8b", "9a", "9b", "10a", "10b", "11b"],
+        "soil": ["Moist, Loamy, Sandy"],
         "companions": [],
         "sun": 5,
-        "image": "https://www.johnnyseeds.com/dw/image/v2/BBBW_PRD/on/demandware.static/-/Sites-jss-master/default/dw2f79264c/images/products/flowers/01814_01_sunrichorangesum.jpg?sw=387&cx=302&cy=0&cw=1196&ch=1196"
+        "image": "https://www.johnnyseeds.com/dw/image/v2/BBBW_PRD/on/demandware.static/-/Sites-jss-master/default/dw2f79264c/images/products/flowers/01814_01_sunrichorangesum.jpg?sw=387&cx=302&cy=0&cw=1196&ch=1196",
+        "edible parts": ["seed"]
     },
     {
         "genus": "Helianthus",
         "species": "annuus",
         "common_name": "Teddy Bear sunflower",
         "water_freq": 5,
-        "hardiness": [2,3,4,5,6,7,8,9,10,11],
-        "soil": "Moist, Loamy, Sandy",
+        "hardiness": ["2a", "2b", "3a","3b","4a","4b","5a","5b","6a","6b","7a","7b", "8a", "8b", "9a", "9b", "10a", "10b", "11b"],
+        "soil": ["Moist, Loamy, Sandy"],
         "companions": [],
         "sun": 5,
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Helianthus_annuus_%28cultivar%29_02.jpg/2560px-Helianthus_annuus_%28cultivar%29_02.jpg"
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Helianthus_annuus_%28cultivar%29_02.jpg/2560px-Helianthus_annuus_%28cultivar%29_02.jpg",
+        "edible parts": ["seed"]
     },
     {
         "genus": "Helianthus",
         "species": "annuus",
         "common_name": "Mammoth Russian sunflower",
         "water_freq": 5,
-        "hardiness": [2,3,4,5,6,7,8,9,10,11],
-        "soil": "Moist, Loamy, Sandy",
+        "hardiness": ["2a", "2b", "3a","3b","4a","4b","5a","5b","6a","6b","7a","7b", "8a", "8b", "9a", "9b", "10a", "10b", "11b"],
+        "soil": ["Moist, Loamy, Sandy"],
         "companions": [],
         "sun": 5,
-        "image": "https://cdn.shopify.com/s/files/1/1891/5035/products/339_x700.png?v=1492619501"
+        "image": "https://cdn.shopify.com/s/files/1/1891/5035/products/339_x700.png?v=1492619501",
+        "edible parts": ["seed"]
     }
 ]
