@@ -1,5 +1,10 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+var cors = require('cors');
+var path = require('path');
+const pino = require('express-pino-logger')();
+require('dotenv').config();
+
 const cn = {
 	host: 'localhost',
 	port: 5432,
@@ -14,13 +19,16 @@ var db = pgp(cn)
 const port = 3001;
 const server = express();
 
+server.use(cors())
 server.use(bodyParser.json())
+server.use(pino);
 
-server.get('/', (req, res) => {
-	return res.send('Server is doing something\n');
+server.get('/', function (_req, res) {
+  console.log('test');
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-server.get('/forage', (req, res) => {
+server.get('/forage', (_req, res) => {
 	db.any('SELECT * FROM flowerbed;')
 	  .then(function (data) {
 	  	res.status(200)
@@ -37,7 +45,7 @@ server.get('/forage', (req, res) => {
 	  })
 });
 
-server.get('/cols', (req, res) => {
+server.get('/cols', (_req, res) => {
 	db.any('SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name=\'flowerbed\';')
 	  .then(function (data) {
 	  	res.status(200)
@@ -54,6 +62,19 @@ server.get('/cols', (req, res) => {
 	  })
 });
 
+server.post('/add', (_req, res) => {
+});
+
+server.post('/delete', (_req, res) => {
+});
+
+server.put('/edit', (_req, res) => {
+});
+
+server.get('/sort', (_req, res) => {
+  console.log('sort data');
+});
+
 server.listen(port, () =>
-  console.log(`Example app listening on port ${port}!`),
+  console.log(`PLNTR is listening on port ${port}!`),
 );

@@ -8,19 +8,24 @@
     "nodemon": "^1.18.11",
     "npm-run-all": "^4.1.5",
     "pino-colada": "^1.4.4",
-    "react-scripts": "2.1.8"
+    "react-scripts": "^2.1.8"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
+    "bootstrap": "^4.3.1",
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "fs": "0.0.1-security",
     "https": "^1.0.0",
+    "jquery": "^3.4.1",
     "npm": "^6.9.0",
     "path": "^0.12.7",
     "pg": "^7.10.0",
+    "pg-promise": "^8.6.5",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-bootstrap": "^1.0.0-beta.8",
+    "react-dom": "^16.8.6",
+    "typescript": "^3.4.5"
   },
   "scripts": {
     "start": "react-scripts start",
