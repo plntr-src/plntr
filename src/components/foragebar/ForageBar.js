@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 
@@ -24,7 +25,7 @@ export default class ForageBar extends React.Component {
   handleSubmit(event) {
     alert('A name was submitted: ' + this.state.value);
     event.preventDefault();
-    fetch('/search', { /** options */ }).then(result => {
+    fetch('/search', { "cache": "no-cache" }).then(result => {
       // update table data
       this.props.updateData(result);
     });
@@ -49,7 +50,7 @@ export default class ForageBar extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <label>
             <input className="forage-box" style={ boxStyle } placeholder="Roses are red, violets are blue, but what aboot dis plnt?" type="text" value={this.state.value} onChange={this.handleChange} />
-            <button className="forage-btn" type="submit" value=""><img className="forage-icon" src="./assets/plntnsun.png" /></button>
+            <Button className="forage-btn" type="submit" value=""><img alt="button" className="forage-icon" src="./assets/plntnsun.png" /></Button>
           </label>
         </form>
       </div>

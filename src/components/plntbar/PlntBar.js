@@ -19,7 +19,7 @@ class PlntBar extends React.Component {
     this.submitted = true;
     alert('A name was submitted: ' + this.state.value);
     event.preventDefault();
-    fetch('/add', { /** options  specify post */ }).then(result => {
+    fetch('/add', { "cache": "no-cache" }).then(result => {
       console.log('added new plnt: ', result);
       // update table data
       this.setState({ value: '' });

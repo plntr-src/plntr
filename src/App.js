@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
@@ -19,7 +20,9 @@ class App extends Component {
   }
 
   async fetchDataOnMount() {
-    return await fetch("/forage")
+    return await fetch("/forage", {
+      "cache": "no-cache"
+    })
       .then(res => res.json())
       .then(json => {
         console.log('fetched forage data', json)
@@ -28,7 +31,9 @@ class App extends Component {
   }
 
   async fetchColsOnMount() {
-    return await fetch("/cols")
+    return await fetch("/cols", {
+      "cache": "no-cache"
+    })
       .then(response => response.json())
       .then(json => {
         console.log('fetched cols data: ', json)
