@@ -1,17 +1,25 @@
 .plntable {
- width: 100vw;
- height: auto;
+  position: relative;
+  width: 95vw;
+  height: auto;
+  color: grey;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .bold {
-    font-weight: bold;
+  font-weight: bold;
+  color: black;
 }
 
 .plnt-card {
-  width: 95vw;
+  width: 60vw;
   height: 35vh;
-  margin: 0px 2.5vw 0px 2.5vw;
-  margin-bottom: 1em;
+  margin: 1em 17.5vw 2em 17.5vw;
+  border-radius: 0.5em;
+  background-color: white;
+  box-shadow: 0 0 0.4em 0.3em rgba(129, 129, 129, 0.35);
+  overflow: hidden;
 }
 
 .row {
@@ -20,41 +28,42 @@
 }
 
 .col {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+}
+
+.text-container {
+  padding-left: 4em;
 }
 
 .image-container {
   position: relative;
-  background-color: black;
-  width: 18%;
-  max-height: 17em;
+  width: 23%;
+  height: 38vh;
+  margin: 0;
 }
 
 .image {
   position: relative;
-  left: 5%;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 90%;
-  width: 90%;
+  height: 100%;
+  width: 100%;
+  left: 4%;
+  top: -4%;
   object-fit: cover;
   object-position: center;
 }
 
 .sci-name {
     font-size: 3em;
+    color: black;
 }
 
 .common-name {
     font-size: 2em;
+    padding-top: 0.25em;
 }
 
 .icon {
   height: 1.5em;
   width: 1.5em;
-}
-
-.item {
- margin-bottom: 1em;
 }
