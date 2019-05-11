@@ -49,7 +49,7 @@ export default class ForageBar extends React.Component {
       <Menu cols={ this.state.cols } />
         <form onSubmit={this.handleSubmit}>
           <label>
-            <input className="forage-box" style={ boxStyle } placeholder="Roses are red, violets are blue, but what aboot dis plnt?" type="text" value={this.state.value} onChange={this.handleChange} />
+            <input className="forage-box" style={ boxStyle } placeholder="What dis plnt?" type="text" value={this.state.value} onChange={this.handleChange} />
             <Button className="forage-btn" type="submit" value=""><img alt="button" className="forage-icon" src="./assets/plntnsun.png" /></Button>
           </label>
         </form>

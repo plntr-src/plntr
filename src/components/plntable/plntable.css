@@ -3,22 +3,58 @@
  height: auto;
 }
 
-tr {
-    text-align: center;
-    border: 3em solid black;
+.bold {
+    font-weight: bold;
 }
 
-tr:nth-child(even) {
-    background-color: bisque;
+.plnt-card {
+  width: 95vw;
+  height: 35vh;
+  margin: 0px 2.5vw 0px 2.5vw;
+  margin-bottom: 1em;
 }
 
-tr:nth-child(odd) {
-    background-color: aquamarine;
+.row {
+  display: flex;
+  flex-direction: row;
 }
 
-.plnt-img {
-    height: 10em;
-    width: 10em;
-    object-fit: cover;
-    object-position: center;
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
+.image-container {
+  position: relative;
+  background-color: black;
+  width: 18%;
+  max-height: 17em;
+}
+
+.image {
+  position: relative;
+  left: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 90%;
+  width: 90%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.sci-name {
+    font-size: 3em;
+}
+
+.common-name {
+    font-size: 2em;
+}
+
+.icon {
+  height: 1.5em;
+  width: 1.5em;
+}
+
+.item {
+ margin-bottom: 1em;
 }
