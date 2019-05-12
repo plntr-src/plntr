@@ -63,6 +63,9 @@ server.get('/cols', (_req, res) => {
 });
 
 server.post('/add', (_req, res) => {
+	console.log('adding, >>>', _req.body);
+	const req = _req.body;
+	
 });
 
 server.post('/delete', (_req, res) => {

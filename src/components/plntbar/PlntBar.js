@@ -2,6 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import Input from 'react-bootstrap/InputGroup';
 
 function simulateNetworkRequest() {
   return new Promise(resolve => setTimeout(resolve, 2000));
@@ -18,7 +19,17 @@ export class PlntBar extends React.Component {
     this.state = {
       isLoading: false,
       showForm: false,
-      validated: false
+      form: {
+        genus: null,
+        species: null,
+        water_freq: null,
+        sun: null,
+        soil: null,
+        hardiness: null,
+        edible_parts: null,
+        companions: null
+        // images: null // eventually upload mult images
+      }
     }
   }
 
@@ -31,21 +42,34 @@ export class PlntBar extends React.Component {
   }
 
   handleSubmit(event) {
-    const form = event.currentTarget;
-    console.log('form: ', form);
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    this.setState({ validated: true });
+    const form = this.state.form;
+    this.setState({ showForm: !this.state.showForm }, async () => {
+      return await fetch('/add', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(form)
+      }).then(response => {
+        return response.json();
+      })
+    });
   }
 
   handleClose() {
     this.setState({ showForm: false });
   }
 
+  handleChange(event) {
+    const target = event.target;
+    let form = this.state.form;
+    form[target.name] = target.value;
+    this.setState({ form });
+  }
+
   render() {
-    const { isLoading, showForm, validated } = this.state;
+    console.log('this state: ', this.state);
+    let { isLoading, showForm, validated, form } = this.state;
 
     return (
       <div>
@@ -62,38 +86,52 @@ export class PlntBar extends React.Component {
           aria-labelledby="add-plnt-modal"
           centered
         >
-          <Modal.Header closeButton>
-            <Modal.Title id="add-plnt-modal"></Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form
-              inline={ true }
-              noValidate
-              validated={validated}
-              onSubmit={e => this.handleSubmit(e)}
-            >
-              <Form.Group controlId="sci-name">
-                <Form.Label>Scientific name</Form.Label>
-                <Form.Control type="genus" placeholder="Genus" />
-                <Form.Control type="species" placeholder="Species" />
-              </Form.Group>
-              <Form.Group controlId="metrics">
-                <Form.Label>Metrics</Form.Label>
-                <Form.Control type="soil" placeholder="Soil characteristics" />
-                <Form.Control type="water_freq" placeholder="Water frequency" />
-                <Form.Control type="sun" placeholder="Light conditions" />
-              </Form.Group>
-              <Form.Group controlId="lists">
-                <Form.Label>Ecosystem</Form.Label>
-                <Form.Control type="edible_parts" placeholder="Edible parts" />
-                <Form.Control type="companions" placeholder="Companions" />
-              </Form.Group>
-
-              <Button variant="primary" type="submit">Submit</Button>
-            </Form>
-          </Modal.Body>
+            <Modal.Header closeButton>
+              <Modal.Title id="add-plnt-modal">Add plnt info!</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <form>
+               <div className="plnt-info">
+                <h4>Scientific name</h4>
+                  <input 
+                    type="text" name="genus" 
+                    placeholder="Genus" value={ form.genus || '' } 
+                    onChange={this.handleChange.bind(this)} />
+                  <input 
+                    type="text" name="species" 
+                    placeholder="Species" value={ form.species || '' } 
+                    onChange={this.handleChange.bind(this)} />
+                <h4>Metrics</h4>
+                  <input 
+                    type="text" name="water_freq" 
+                    placeholder="Water frequency" value={ form.water_freq || '' } 
+                    onChange={this.handleChange.bind(this)} />
+                  <input 
+                    type="text" name="sun" 
+                    placeholder="Light conditions" value={ form.sun || '' } 
+                    onChange={this.handleChange.bind(this)} />
+                  <input type="text" name="soil" 
+                    placeholder="Soil requirements" value={ form.soil || '' } 
+                    onChange={this.handleChange.bind(this)} />
+                  <input 
+                    type="text" name="hardiness" 
+                    placeholder="Hardiness zones" value={ form.hardiness || '' } 
+                    onChange={this.handleChange.bind(this)} />
+                <h4>Ecosystem</h4>
+                  <input 
+                    type="text" name="edible_parts" 
+                    placeholder="Edible parts" value={ form.edible_parts || '' } 
+                    onChange={this.handleChange.bind(this)} />
+                  <input 
+                    type="text" name="companions" 
+                    placeholder="Companions" value={ form.companions || '' } 
+                    onChange={this.handleChange.bind(this)} />
+               </div>
+              </form>
+            </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={this.handleClose}>Close</Button>
+            <Button onClick={this.handleSubmit.bind(this)}>Submit</Button>
+            <Button onClick={this.handleClose.bind(this)}>Close</Button>
           </Modal.Footer>
         </Modal>
       </div>
