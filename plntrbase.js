@@ -1,50 +1,80 @@
-var express = require('express');
+const express = require('express')
+const bodyParser = require('body-parser')
 var cors = require('cors');
 var path = require('path');
 const pino = require('express-pino-logger')();
-const bodyParser = require('body-parser');
-const app = express();
 require('dotenv').config();
 
-app.use(cors())
-app.use(express.static(path.join(__dirname, 'build')));
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
-app.use(pino);
+const cn = {
+	host: 'localhost',
+	port: 5432,
+	database: 'plntrdb',
+	user: 'seedguardian',
+	password: 'peppermintbutler'
+};
 
-app.get('/', function (_req, res) {
+var pgp = require('pg-promise')()
+var db = pgp(cn)
+
+const port = 3001;
+const server = express();
+
+server.use(cors())
+server.use(bodyParser.json())
+server.use(pino);
+
+server.get('/', function (_req, res) {
   console.log('test');
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-
-var testData = require('./src/dummydata/forageData.json');
-var cols = require('./src/dummydata/cols.json');
-
-app.get('/cols', (_req, res) => {
-  return res.send(cols);
-})
-
-app.get('/forage', (_req, res) => {
- return res.send(testData);
+server.get('/forage', (_req, res) => {
+	db.any('SELECT * FROM flowerbed;')
+	  .then(function (data) {
+	  	res.status(200)
+	    .json({
+	    	status: 'success',
+	    	body: {
+	    		docs: data
+	    	},
+	    	message: 'Look at what we found in the flowerbed'
+	    });
+	  })
+	  .catch(function (error) {
+	    console.log('ERROR foraging:', error)
+	  })
 });
 
-app.get('/search', (_req, res) => {
-  console.log(
-    'searching for: ',
-    
-  )
-})
-
-app.post('/add', (_req, res) => {
-  console.log('add plnt');
+server.get('/cols', (_req, res) => {
+	db.any('SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name=\'flowerbed\';')
+	  .then(function (data) {
+	  	res.status(200)
+	    .json({
+	    	status: 'success',
+	    	body: data.map(col => {
+					return col['column_name'];
+				 }),
+	    	message: 'Successfully retrieved all columns'
+	    });
+	  })
+	  .catch(function (error) {
+	    console.log('ERROR getting columns:', error)
+	  })
 });
 
-app.get('/sort', (_req, res) => {
+server.post('/add', (_req, res) => {
+});
+
+server.post('/delete', (_req, res) => {
+});
+
+server.put('/edit', (_req, res) => {
+});
+
+server.get('/sort', (_req, res) => {
   console.log('sort data');
 });
 
-app.listen(3001, () =>
-  console.log('Express server is running on localhost:3001')
+server.listen(port, () =>
+  console.log(`PLNTR is listening on port ${port}!`),
 );

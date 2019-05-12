@@ -1,40 +1,102 @@
 import React from 'react';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
 
-class PlntBar extends React.Component {
+function simulateNetworkRequest() {
+  return new Promise(resolve => setTimeout(resolve, 2000));
+}
+
+export class PlntBar extends React.Component {
   
-  constuctor(props) {
+  constructor(props) {
     super(props);
 
-    this.submitted = false;
+    this.handleAdd = this.handleAdd.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+
     this.state = {
-      value: ''
+      isLoading: false,
+      showForm: false,
+      validated: false
     }
   }
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
-  }
-
-  handleSubmit(event) {
-    this.submitted = true;
-    alert('A name was submitted: ' + this.state.value);
-    event.preventDefault();
-    fetch('/add', { "cache": "no-cache" }).then(result => {
-      console.log('added new plnt: ', result);
-      // update table data
-      this.setState({ value: '' });
+  handleAdd() {
+    this.setState({ isLoading: true }, () => {
+      simulateNetworkRequest().then(() => {
+        this.setState({ isLoading: false, showForm: true });
+      });
     });
   }
 
+  handleSubmit(event) {
+    const form = event.currentTarget;
+    console.log('form: ', form);
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    this.setState({ validated: true });
+  }
+
+  handleClose() {
+    this.setState({ showForm: false });
+  }
+
   render() {
+    const { isLoading, showForm, validated } = this.state;
+
     return (
-      <form onSubmit={this.handleSubmit}>
-          <label>
-            Name:
-            <input type="text" value={this.state.value} onChange={this.handleChange} />
-          </label>
-          <input type="submit" value="Plnt" />
-        </form>
+      <div>
+        <Button 
+          onClick={!isLoading ? this.handleAdd : null}
+          variant="primary" 
+          type="button">
+          {isLoading ? 'Loading form…' : 'Add plnt!'}
+        </Button>
+
+        <Modal
+          show={showForm} onHide={this.handleClose}
+          size="lg"
+          aria-labelledby="add-plnt-modal"
+          centered
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id="add-plnt-modal"></Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form
+              inline={ true }
+              noValidate
+              validated={validated}
+              onSubmit={e => this.handleSubmit(e)}
+            >
+              <Form.Group controlId="sci-name">
+                <Form.Label>Scientific name</Form.Label>
+                <Form.Control type="genus" placeholder="Genus" />
+                <Form.Control type="species" placeholder="Species" />
+              </Form.Group>
+              <Form.Group controlId="metrics">
+                <Form.Label>Metrics</Form.Label>
+                <Form.Control type="soil" placeholder="Soil characteristics" />
+                <Form.Control type="water_freq" placeholder="Water frequency" />
+                <Form.Control type="sun" placeholder="Light conditions" />
+              </Form.Group>
+              <Form.Group controlId="lists">
+                <Form.Label>Ecosystem</Form.Label>
+                <Form.Control type="edible_parts" placeholder="Edible parts" />
+                <Form.Control type="companions" placeholder="Companions" />
+              </Form.Group>
+
+              <Button variant="primary" type="submit">Submit</Button>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.handleClose}>Close</Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
     )
   }
 }

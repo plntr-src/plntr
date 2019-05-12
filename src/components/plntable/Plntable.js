@@ -1,6 +1,5 @@
 import React from 'react';
 import './plntable.css';
-import { categories } from '../constants';
 
 const SUN = "sun";
 const WATER = "water";
@@ -12,13 +11,12 @@ const meter = (num, type) => {
     iconUrl = './assets/sun.png';
   }
   for (let i=num; i > 0; i--) {
-    icons.push(<img className="icon" src={ iconUrl } />)
+    icons.push(<img key={i} className="icon" src={ iconUrl } />)
   }
   return icons;
 }
 
 const Card = props => {
-  console.log('card props: ', props);
   return <div className="plnt-card">
     <div className="row">
       <div className="image-container"><img className="image" src={ props.image } /></div>
@@ -59,13 +57,14 @@ const Card = props => {
 
 
 export const Plntable = props => {
-
-  console.log('plnts: ', props.data);
-
   return (
     <div className="plntable">
       {
-        props.data.map((data, i) => <Card key={ i } { ...data } />)
+        props.data.map((data, i, items) => <div key={ i } ><Card { ...data } />{
+          i === items.length - 1 ?
+          <div /> :
+          <div className="linebreak" />
+        }</div>)
       }
     </div>
   )

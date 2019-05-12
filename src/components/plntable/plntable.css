@@ -3,8 +3,6 @@
   width: 95vw;
   height: auto;
   color: grey;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 .bold {
@@ -15,10 +13,8 @@
 .plnt-card {
   width: 60vw;
   height: 35vh;
-  margin: 1em 17.5vw 2em 17.5vw;
-  border-radius: 0.5em;
+  margin-bottom: 1em;
   background-color: white;
-  box-shadow: 0 0 0.4em 0.3em rgba(129, 129, 129, 0.35);
   overflow: hidden;
 }
 
@@ -54,16 +50,24 @@
 }
 
 .sci-name {
-    font-size: 3em;
+    font-size: 2em;
     color: black;
 }
 
 .common-name {
-    font-size: 2em;
+    font-size: 1.5em;
     padding-top: 0.25em;
 }
 
 .icon {
   height: 1.5em;
   width: 1.5em;
+}
+
+.linebreak {
+    position: relative;
+    width: 55vw;
+    border-top: 2px solid rgba(148, 142, 142, 0.329);
+    margin-bottom: 1em;
+    left: calc(5vw / 2);
 }

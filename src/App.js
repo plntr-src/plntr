@@ -5,6 +5,7 @@ import './App.css';
 
 import ForageBar from './components/foragebar/ForageBar';
 import { Plntable } from './components/plntable/Plntable.js';
+import { PlntBar } from './components/plntbar/PlntBar.js';
 
 class App extends Component {
 
@@ -47,7 +48,6 @@ class App extends Component {
       this.fetchDataOnMount(),
       this.fetchColsOnMount()
     ]).then((dataAndCols) => {
-      console.log('d and c: ', dataAndCols);
       this.setState({
         data: dataAndCols[0],
         cols: dataAndCols[1]
@@ -62,7 +62,6 @@ class App extends Component {
   }
 
   render () {
-    console.log('this state: ', this.state);
     if (this.state.data.length === 0 && this.state.cols.length === 0) {
       return <div>tesst</div>
     }
@@ -81,7 +80,8 @@ class App extends Component {
 
     return (
       <div className="plntrplot">
-        <ForageBar { ...forageBarProps } />
+        {/* <ForageBar { ...forageBarProps } /> */}
+        <PlntBar />
         <Plntable { ...plntableProps } />
       </div>
     )
