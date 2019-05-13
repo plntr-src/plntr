@@ -44,7 +44,18 @@ export class PlntBar extends React.Component {
 
   handleSubmit(event) {
     const form = this.state.form;
-    this.setState({ showForm: !this.state.showForm }, async () => {
+    this.setState({ showForm: false, form: {
+      genus: null,
+      species: null,
+      common_name: null,
+      water_freq: null,
+      sun: null,
+      soil: null,
+      hardiness: null,
+      edible_parts: null,
+      companions: null,
+      image: null // eventually upload mult images      
+    }}, async () => {
       return await fetch('/add', {
         method: 'POST',
         headers: {

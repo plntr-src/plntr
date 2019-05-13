@@ -70,7 +70,7 @@ server.post('/add', (_req, res) => {
 		}', '${
 			data.species
 		}', '${
-			data.column_name
+			data.common_name
 		}', ${
 			data.water_freq
 		}, '{${
