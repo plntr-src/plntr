@@ -63,9 +63,35 @@ server.get('/cols', (_req, res) => {
 });
 
 server.post('/add', (_req, res) => {
-	console.log('adding, >>>', _req.body);
-	const req = _req.body;
-	
+	const data = _req.body;
+  console.log('data: ', data);
+	db.any(`INSERT into flowerbed (genus, species, common_name, water_freq, hardiness, soil, companions, sun, image, edible_parts) values ('${
+		  data.genus
+		}', '${
+			data.species
+		}', '${
+			data.column_name
+		}', ${
+			data.water_freq
+		}, '{${
+			data.hardiness	
+		}}', '{${
+			data.soil
+		}}', '{${
+			data.companions
+		}}', ${
+			data.sun
+		}, '${
+			data.image
+		}', '{${
+			data.edible_parts
+		}}')`)
+		.then(response => {
+			console.log('response: ', response)
+		})
+		.catch(error => {
+			console.log('ERROR inserting new data:', error)
+		})
 });
 
 server.post('/delete', (_req, res) => {

@@ -21,9 +21,7 @@ class App extends Component {
   }
 
   async fetchDataOnMount() {
-    return await fetch("/forage", {
-      "cache": "no-cache"
-    })
+    return await fetch("/forage")
       .then(res => res.json())
       .then(json => {
         console.log('fetched forage data', json)
@@ -32,9 +30,7 @@ class App extends Component {
   }
 
   async fetchColsOnMount() {
-    return await fetch("/cols", {
-      "cache": "no-cache"
-    })
+    return await fetch("/cols")
       .then(response => response.json())
       .then(json => {
         console.log('fetched cols data: ', json)

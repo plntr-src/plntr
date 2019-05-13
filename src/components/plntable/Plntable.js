@@ -35,13 +35,14 @@ const Card = props => {
             <br />
             {
               props.companions.length > 0 ?
-              <div>Companions with<span>&nbsp;&nbsp;</span><span className="bold">{ props.companions.join(', ') }</span></div> :
+              <div>Companions with<div className="bold">{ props.companions.join(', ') }</div></div> :
               <div />
             }
           </div>
           <div className="col">
-            <div>Soil requirements<span>&nbsp;&nbsp;</span><span className="bold">{ props.soil.join(', ') }</span></div>
             <div className="hardiness">Hardiness Zones<span>&nbsp;&nbsp;</span><span className="bold">{ props.hardiness[0] + ' - ' + props.hardiness[props.hardiness.length - 1]  }</span></div>
+            <br />
+            <div>Soil requirements<div className="bold">{ props.soil.join(', ') }</div></div>
             <br />
             {
               props.edible_parts[0] === '--' ?

@@ -25,7 +25,7 @@ export default class ForageBar extends React.Component {
   handleSubmit(event) {
     alert('A name was submitted: ' + this.state.value);
     event.preventDefault();
-    fetch('/search', { "cache": "no-cache" }).then(result => {
+    fetch('/search').then(result => {
       // update table data
       this.props.updateData(result);
     });

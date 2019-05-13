@@ -13,7 +13,7 @@ export class PlntBar extends React.Component {
   constructor(props) {
     super(props);
 
-    this.handleAdd = this.handleAdd.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
 
     this.state = {
@@ -22,18 +22,19 @@ export class PlntBar extends React.Component {
       form: {
         genus: null,
         species: null,
+        common_name: null,
         water_freq: null,
         sun: null,
         soil: null,
         hardiness: null,
         edible_parts: null,
-        companions: null
-        // images: null // eventually upload mult images
+        companions: null,
+        image: null // eventually upload mult images
       }
     }
   }
 
-  handleAdd() {
+  handleClick() {
     this.setState({ isLoading: true }, () => {
       simulateNetworkRequest().then(() => {
         this.setState({ isLoading: false, showForm: true });
@@ -50,9 +51,7 @@ export class PlntBar extends React.Component {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(form)
-      }).then(response => {
-        return response.json();
-      })
+      }).then(response => response.json())
     });
   }
 
@@ -74,7 +73,7 @@ export class PlntBar extends React.Component {
     return (
       <div>
         <Button 
-          onClick={!isLoading ? this.handleAdd : null}
+          onClick={!isLoading ? this.handleClick : null}
           variant="primary" 
           type="button">
           {isLoading ? 'Loading form…' : 'Add plnt!'}
@@ -92,6 +91,11 @@ export class PlntBar extends React.Component {
             <Modal.Body>
               <form>
                <div className="plnt-info">
+                <h4>Image</h4>
+                  <input 
+                      type="text" name="image" 
+                      placeholder="Image link" value={ form.image || '' } 
+                      onChange={this.handleChange.bind(this)} />                
                 <h4>Scientific name</h4>
                   <input 
                     type="text" name="genus" 
@@ -101,13 +105,17 @@ export class PlntBar extends React.Component {
                     type="text" name="species" 
                     placeholder="Species" value={ form.species || '' } 
                     onChange={this.handleChange.bind(this)} />
+                  <input 
+                    type="text" name="common_name" 
+                    placeholder="Common name" value={ form.common_name || '' } 
+                    onChange={this.handleChange.bind(this)} />
                 <h4>Metrics</h4>
                   <input 
-                    type="text" name="water_freq" 
+                    type="number" name="water_freq" 
                     placeholder="Water frequency" value={ form.water_freq || '' } 
                     onChange={this.handleChange.bind(this)} />
                   <input 
-                    type="text" name="sun" 
+                    type="number" name="sun" 
                     placeholder="Light conditions" value={ form.sun || '' } 
                     onChange={this.handleChange.bind(this)} />
                   <input type="text" name="soil" 
