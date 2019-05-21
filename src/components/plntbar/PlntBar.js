@@ -13,8 +13,11 @@ export class PlntBar extends React.Component {
   constructor(props) {
     super(props);
 
+    console.log('props in plntbar: ', props);
     this.handleClick = this.handleClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
 
     this.state = {
       isLoading: false,
@@ -62,7 +65,21 @@ export class PlntBar extends React.Component {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(form)
-      }).then(response => response.json())
+      })
+      .then(response => 
+        response.json()
+        .then(data => ({
+            data: data,
+            status: response.status
+        }))
+        .then(res => {
+          console.log('[ added new entry ] res', res);
+          if (res.status === 200) {
+            console.log('new post id: ', res.data.postId);
+            this.props.refresh(true);
+          }
+        })
+      )
     });
   }
 
@@ -106,51 +123,51 @@ export class PlntBar extends React.Component {
                   <input 
                       type="text" name="image" 
                       placeholder="Image link" value={ form.image || '' } 
-                      onChange={this.handleChange.bind(this)} />                
+                      onChange={this.handleChange} />                
                 <h4>Scientific name</h4>
                   <input 
                     type="text" name="genus" 
                     placeholder="Genus" value={ form.genus || '' } 
-                    onChange={this.handleChange.bind(this)} />
+                    onChange={this.handleChange} />
                   <input 
                     type="text" name="species" 
                     placeholder="Species" value={ form.species || '' } 
-                    onChange={this.handleChange.bind(this)} />
+                    onChange={this.handleChange} />
                   <input 
                     type="text" name="common_name" 
                     placeholder="Common name" value={ form.common_name || '' } 
-                    onChange={this.handleChange.bind(this)} />
+                    onChange={this.handleChange} />
                 <h4>Metrics</h4>
                   <input 
                     type="number" name="water_freq" 
                     placeholder="Water frequency" value={ form.water_freq || '' } 
-                    onChange={this.handleChange.bind(this)} />
+                    onChange={this.handleChange} />
                   <input 
                     type="number" name="sun" 
                     placeholder="Light conditions" value={ form.sun || '' } 
-                    onChange={this.handleChange.bind(this)} />
+                    onChange={this.handleChange} />
                   <input type="text" name="soil" 
                     placeholder="Soil requirements" value={ form.soil || '' } 
-                    onChange={this.handleChange.bind(this)} />
+                    onChange={this.handleChange} />
                   <input 
                     type="text" name="hardiness" 
                     placeholder="Hardiness zones" value={ form.hardiness || '' } 
-                    onChange={this.handleChange.bind(this)} />
+                    onChange={this.handleChange} />
                 <h4>Ecosystem</h4>
                   <input 
                     type="text" name="edible_parts" 
                     placeholder="Edible parts" value={ form.edible_parts || '' } 
-                    onChange={this.handleChange.bind(this)} />
+                    onChange={this.handleChange} />
                   <input 
                     type="text" name="companions" 
                     placeholder="Companions" value={ form.companions || '' } 
-                    onChange={this.handleChange.bind(this)} />
+                    onChange={this.handleChange} />
                </div>
               </form>
             </Modal.Body>
           <Modal.Footer>
-            <Button onClick={this.handleSubmit.bind(this)}>Submit</Button>
-            <Button onClick={this.handleClose.bind(this)}>Close</Button>
+            <Button onClick={this.handleSubmit}>Submit</Button>
+            <Button onClick={this.handleClose}>Close</Button>
           </Modal.Footer>
         </Modal>
       </div>

@@ -19,6 +19,7 @@
 }
 
 .row {
+  position: relative;
   display: flex;
   flex-direction: row;
 }
@@ -71,4 +72,22 @@
     border-top: 2px solid rgba(148, 142, 142, 0.329);
     margin-bottom: 1em;
     left: calc(5vw / 2);
+}
+
+.modicons {
+  position: absolute;
+  right: 2em;
+}
+
+.modicons * {
+  margin-left: 1em;
+  text-align: center;
+}
+
+.delete {
+  transform: translateX(-40%);
+}
+
+.edit {
+  transform: translateX(-35%);
 }

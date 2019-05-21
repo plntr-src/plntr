@@ -85,16 +85,35 @@ server.post('/add', (_req, res) => {
 			data.image
 		}', '{${
 			data.edible_parts
-		}}')`)
+		}}') RETURNING id;`)
 		.then(response => {
 			console.log('response: ', response)
+			res.status(200)
+	    .json({
+				postId: response[0].id,
+	    	status: 'success',
+	    	message: `Successfully added new data for ${data.genus + ' '+ data.species}.`
+	    });
 		})
 		.catch(error => {
 			console.log('ERROR inserting new data:', error)
 		})
 });
 
-server.post('/delete', (_req, res) => {
+server.delete('/delete', (_req, res) => {
+	const postId = _req.body.id;
+	db.any(`DELETE FROM flowerbed WHERE id='${ postId }';`)
+	.then(response => {
+		console.log('resp aft del: ', response)
+		res.status(200).json({
+			status: 'success',
+			message: `Successfully deleted entry for plnt-id ${ postId }.`
+			// should have flag to signal refresh?
+		})
+	})
+	.catch(err => {
+		console.log(`ERROR deleting data plnt-id ${ postId }. \nError: ${ err }`);
+	})
 });
 
 server.put('/edit', (_req, res) => {

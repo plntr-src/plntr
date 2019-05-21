@@ -17,7 +17,9 @@ class App extends Component {
       cols: []
     }
 
-    this.updateData.bind(this);
+    this.updateData = this.updateData.bind(this);
+    this.refresh = this.refresh.bind(this);
+    this.fetchData = this.fetchData.bind(this);
   }
 
   async fetchDataOnMount() {
@@ -38,7 +40,7 @@ class App extends Component {
       });
   }
 
-  componentWillMount() {
+  fetchData() {
     // get plnt data
     Promise.all([
       this.fetchDataOnMount(),
@@ -51,10 +53,21 @@ class App extends Component {
     })
   }
 
+  componentWillMount() {
+    this.fetchData();
+  }
+
   updateData(newData) {
     this.setState({
       data: newData
     })
+  }
+
+  refresh(flag) {
+    console.log('called refresh', flag);
+    if (flag) {
+      this.fetchData();
+    }
   }
 
   render () {
@@ -71,13 +84,14 @@ class App extends Component {
 
     let plntableProps = {
       data,
-      cols
+      cols,
+      refresh: this.refresh
     }
 
     return (
       <div className="plntrplot">
         {/* <ForageBar { ...forageBarProps } /> */}
-        <PlntBar />
+        <PlntBar refresh={ this.refresh } />
         <Plntable { ...plntableProps } />
       </div>
     )
