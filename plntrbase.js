@@ -74,7 +74,7 @@ server.post('/add', (_req, res) => {
 		}', ${
 			data.water_freq
 		}, '{${
-			data.hardiness	
+			data.hardiness
 		}}', '{${
 			data.soil
 		}}', '{${
@@ -116,6 +116,11 @@ server.delete('/delete', (_req, res) => {
 	})
 });
 
+
+//EDIT requires the document ID to be passed
+//from the front-end in order to identify which document to
+//correctly update
+//IS IT BETTER TO ADD EVERYTHING IN LOWERCASE FOR SEARCH CASE INSENSITIVITY?
 server.post('/edit', (_req, res) => {
 	var id = _req.body.id
 	var genus = (_req.body.genus !== "") ? _req.body.genus: '--'
@@ -192,20 +197,37 @@ server.get('/search', (_req, res) => {
 	var keyword = _req.query.keyword
 	var col = _req.query.col
 
-	db.any(`SELECT * FROM flowerbed WHERE ${col} = ${keyword};`)
-		.then(function (data) {
-			res.status(200)
-			.json({
-				status: 'success',
-				body: {
-					docs: data
-				},
-				message: `We found what you're looking for`
-			});
+	if(col == "hardiness" || col == "soil" || col == "companions" || col == "edible_parts"){
+		db.any(`SELECT * FROM flowerbed WHERE '${keyword}' = ANY(${col});`)
+			.then(function (data) {
+				res.status(200)
+				.json({
+					status: 'success',
+					body: {
+						docs: data
+					},
+					message: `We found what you're looking for`
+				});
+			})
+			.catch(function (error) {
+				console.log(`ERROR searching for ${keyword} in column ${col}:`, error)
 		})
-		.catch(function (error) {
-			console.log(`ERROR ssearching for ${keyword} in column ${col}:`, error)
-		})
+	} else {
+		db.any(`SELECT * FROM flowerbed WHERE ${col} = '${keyword}';`)
+			.then(function (data) {
+				res.status(200)
+				.json({
+					status: 'success',
+					body: {
+						docs: data
+					},
+					message: `We found what you're looking for`
+				});
+			})
+			.catch(function (error) {
+				console.log(`ERROR searching for ${keyword} in column ${col}:`, error)
+			})
+		}
 		console.log(`searching for ${keyword} in column ${col}`);
 });
 
