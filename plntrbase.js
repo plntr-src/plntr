@@ -116,11 +116,97 @@ server.delete('/delete', (_req, res) => {
 	})
 });
 
-server.put('/edit', (_req, res) => {
+server.post('/edit', (_req, res) => {
+	var id = _req.body.id
+	var genus = (_req.body.genus !== "") ? _req.body.genus: '--'
+	var species = (_req.body.species !== "") ? _req.body.species.toLowerCase() : '--'
+	var common_name = (_req.body.common_name !== "") ? _req.body.common_name : '--'
+	var water_freq = (_req.body.water_freq !== "") ? _req.body.water_freq : '--'
+	var hardiness = (_req.body.hardiness !== "") ? '{'+_req.body.hardiness.join(',')+'}' : '{"--"}'
+	var soil = (_req.body.soil !== "") ? '{'+_req.body.soil.join(',')+'}' : '{"--"}'
+	var companions = (_req.body.companions !== "") ? '{'+_req.body.companions.join(',')+'}' : '{"--"}'
+	var sun = (_req.body.sun !== "") ? _req.body.sun : '--'
+	var image = (_req.body.image !== "") ? _req.body.image : '--'
+	var edible_parts = (_req.body.edible_parts !== "") ? '{'+_req.body.edible_parts.join(',')+'}' : '{"--"}'
+
+	db.any(`UPDATE flowerbed
+		SET
+			genus = '${genus}', 
+			species = '${species}', 
+			common_name = '${common_name}', 
+			water_freq = ${water_freq}, 
+			hardiness = '${hardiness}', 
+			soil = '${soil}', 
+			companions = '${companions}', 
+			sun = ${sun}, 
+			image = '${image}', 
+			edible_parts = '${edible_parts}'
+		WHERE id = ${id}
+			;`)
+		.then(function (data) {
+			res.status(200)
+			.json({
+				status: 'success',
+				message: `${common_name} was successfully maintained`
+			});
+		})
+		.catch(function (error) {
+			console.log('ERROR editting data:', error)
+		})
+		console.log(`editting document ${id}`);
 });
 
+//Sort mode must be passed as an API parameter:
+// /sort?sortMode=common_name
+// value of sortMode is the column that we want to sort by
 server.get('/sort', (_req, res) => {
-  console.log('sort data');
+	if (_req.query.sortMode !== null && _req.query.sortMode !== undefined){
+		var sortMode = _req.query.sortMode
+	} else {
+		var sortMode = 'common_name'
+	}
+	db.any(`SELECT * FROM flowerbed ORDER BY ${sortMode} ASC;`)
+		.then(function (data) {
+			res.status(200)
+			.json({
+				status: 'success',
+				body: {
+					docs: data
+				},
+				message: `We organized the flowerbed by ${sortMode}`
+			});
+		})
+		.catch(function (error) {
+			console.log(`ERROR sorting by ${sortMode} :`, error)
+		})
+		console.log('sort data');
+});
+
+
+//Search requires two parameters:
+// keyword=<keyword>
+// col=<column to search>
+// endpoint looks like /search?keyword=<keyword>&col=<column>
+// In version 1, search will only support exact match
+server.get('/search', (_req, res) => {
+	var keyword = _req.query.keyword
+	var col = _req.query.col
+
+	db.any(`SELECT * FROM flowerbed WHERE ${col} = ${keyword};`)
+		.then(function (data) {
+			res.status(200)
+			.json({
+				status: 'success',
+				body: {
+					docs: data
+				},
+				message: `We found what you're looking for`
+			});
+		})
+		.catch(function (error) {
+			console.log(`ERROR ssearching for ${keyword} in column ${col}:`, error)
+		})
+		console.log(`searching for ${keyword} in column ${col}`);
 });
 
 server.listen(port, () =>
