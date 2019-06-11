@@ -11,51 +11,41 @@ const meter = (num, type) => {
     iconUrl = './assets/sun.png';
   }
   for (let i=num; i > 0; i--) {
-    icons.push(<img key={i} alt={type} className="icon" src={ iconUrl } />)
+    icons.push(<img key={i} alt={type} className={`${ type }-icon`} src={ iconUrl } />)
   }
   return icons;
 }
 
 const Card = props => {
-
   return <div className="plnt-card">
-    <div className="row">
+    <div className="col content-container">
       <div className="image-container"><img className="image" src={ props.image } /></div>
-      <div className="col text-container">
+      <div className="text-container col">
         {
-          props.common_name === '--' ?
+          !props.common_name || props.common_name === '--' ? 
           <br /> :
           <div className="common-name">{ props.common_name }</div>
         }
         <div className="sci-name">{ props.genus } { props.species.toLowerCase() }</div>
-        <br />
-        <div className="row">
+        {
+          !props.variety || props.variety === '--' ?
+          <div /> :
+          <div className="common-name">{ props.variety.toLowerCase() }</div>
+        }
+        <div className="row metrics">
           <div className="col">
-            <div className="water"><span className="bold">Water</span> { meter(props.water_freq, WATER) }</div>
-            <div className="sun"><span className="bold">Sun</span> { meter(props.sun, SUN) }</div>
-            <br />
-            {
-              props.companions.length > 0 ?
-              <div>Companions with<div className="bold">{ props.companions.join(', ') }</div></div> :
-              <div />
-            }
+            <div className="bold">Water</div>
+            <div className="icons">{ meter(props.water_freq, WATER) }</div>
           </div>
           <div className="col">
-            <div className="hardiness">Hardiness Zones<span>&nbsp;&nbsp;</span><span className="bold">{ props.hardiness[0] + ' - ' + props.hardiness[props.hardiness.length - 1]  }</span></div>
-            <br />
-            <div>Soil requirements<div className="bold">{ props.soil.join(', ') }</div></div>
-            <br />
-            {
-              props.edible_parts[0] === '--' ?
-              <div /> :
-              <div className="edible-parts">Edible parts<span>&nbsp;&nbsp;</span><span className="bold">{ props.edible_parts.join(', ') }</span></div>
-            }
+            <div className="bold">Zone</div>
+            <div className="hardiness">{ props.hardiness[0] + ' - ' + props.hardiness[props.hardiness.length - 1]  }</div>
+          </div>
+          <div className="col">
+            <div className="bold">Sun</div>
+            <div className="icons">{ meter(props.sun, SUN) }</div>
           </div>
         </div>
-      </div>
-      <div className="row modicons">
-        <button onClick={props.handleDelete.bind(null, { id: props.id, refresh: props.refresh })} className="delete-btn"><img className="icon delete" alt="delete" src="./assets/trash.png" /></button>
-        <button className="edit-btn"><img className="icon edit" alt="edit" src="./assets/edit.png" /></button>
       </div>
     </div>
   </div>
@@ -107,11 +97,7 @@ export class Plntable extends React.Component {
     return (
       <div className="plntable">
         {
-          this.props.data.map((data, i, items) => <div key={ i } ><Card { ...{...data, ...cardProps} } />{
-            i === items.length - 1 ?
-            <div /> :
-            <div className="linebreak" />
-          }</div>)
+          this.props.data.map((data, i, items) => <Card { ...{...data, ...cardProps} } />)
         }
       </div>
     )
