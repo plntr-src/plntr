@@ -3,6 +3,7 @@
   color: grey;
   display: flex;
   flex-wrap: wrap;
+  top: 70px;
 }
 
 .bold {

@@ -8,11 +8,21 @@ export const categories = [
     "Hardiness Zone"
   ];
 
+export const sortTypes = [
+  "ABC",
+  "Most Water",
+  "Least Water",
+  "Most Sun",
+  "Least Sun",
+  "Newly Added"
+]
+
 const schema = {
   id: 0,
   genus: '',
   species: '',
   common_name: '',
+  variety: '',
   water_freq: 0,
   hardiness: [],
   soil: [],

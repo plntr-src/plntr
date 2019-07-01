@@ -1,0 +1,40 @@
+.dropdown-menu {
+    /* position: relative;
+    max-width: 100px;
+    height: auto; */
+}
+
+.options {
+    position: relative;
+}
+
+.current-opt {
+    position: relative;
+    min-height: 40px;
+    border: 1px solid rgb(195, 195, 195);
+    text-align: center;
+    line-height: 38px;
+}
+
+.opt {
+    width: 114px;
+    background-color: white;
+}
+
+.dp-dn-opt {
+    border-bottom: 1px solid rgb(195, 195, 195);
+    border-left: 1px solid rgb(195, 195, 195);
+    border-right: 1px solid rgb(195, 195, 195);
+}
+
+.dp-dn-opt button {
+    padding: 8px;
+    border: none;
+    height: 100%;
+    width: 100%;
+    background-color: aliceblue;
+}
+
+.dp-dn-opt button:hover {
+    opacity: 0.6;
+}

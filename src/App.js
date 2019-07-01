@@ -91,15 +91,6 @@ class App extends Component {
     return (
       <div className="plntrplot">
         <ForageBar { ...forageBarProps } />
-        <div>
-          {
-            // ['Water Frequency', 'Sun', 'Soil Type', 'Edible'].map(filter => {
-            //   if (filter === 'Edible') {
-
-            //   }
-            // })
-          }
-        </div>
         <PlntPopUp refresh={ this.refresh } />
         <Plntable { ...plntableProps } />
       </div>
