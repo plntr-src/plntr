@@ -5,7 +5,9 @@
 .plntrplot {
   position: relative;
   height: 100%;
-  width: 100%;
+  width: auto;
+  left: 50%;
+  transform: translate(-50%);
 }
 
 

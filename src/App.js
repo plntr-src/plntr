@@ -5,7 +5,7 @@ import './App.css';
 
 import ForageBar from './components/foragebar/ForageBar';
 import { Plntable } from './components/plntable/Plntable.js';
-import { PlntBar } from './components/plntbar/PlntBar.js';
+import { PlntPopUp } from './components/plntPopup/PlntPopUp.js';
 
 class App extends Component {
 
@@ -90,8 +90,17 @@ class App extends Component {
 
     return (
       <div className="plntrplot">
-        {/* <ForageBar { ...forageBarProps } /> */}
-        <PlntBar refresh={ this.refresh } />
+        <ForageBar { ...forageBarProps } />
+        <div>
+          {
+            // ['Water Frequency', 'Sun', 'Soil Type', 'Edible'].map(filter => {
+            //   if (filter === 'Edible') {
+
+            //   }
+            // })
+          }
+        </div>
+        <PlntPopUp refresh={ this.refresh } />
         <Plntable { ...plntableProps } />
       </div>
     )

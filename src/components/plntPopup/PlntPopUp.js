@@ -3,12 +3,13 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import Input from 'react-bootstrap/InputGroup';
+import './plntPopUp.css';
 
 function simulateNetworkRequest() {
   return new Promise(resolve => setTimeout(resolve, 2000));
 }
 
-export class PlntBar extends React.Component {
+export class PlntPopUp extends React.Component {
   
   constructor(props) {
     super(props);
@@ -99,12 +100,17 @@ export class PlntBar extends React.Component {
     let { isLoading, showForm, validated, form } = this.state;
 
     return (
-      <div>
+      <div className='add-plnt-container'>
         <Button 
+          className='add-plnt-btn'
           onClick={!isLoading ? this.handleClick : null}
-          variant="primary" 
+          variant="primary"
           type="button">
-          {isLoading ? 'Loading form…' : 'Add plnt!'}
+          {
+            isLoading ? 
+            'Loading form…' : 
+            <img src='./assets/plus.png' alt='Add plnt!'/>
+          }
         </Button>
 
         <Modal

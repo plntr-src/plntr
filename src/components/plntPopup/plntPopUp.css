@@ -1,0 +1,26 @@
+.plnt-info {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.add-plnt-container {
+    position: absolute;
+    right: 0%;
+    top: 1%;
+    width: 5%;
+    height: 100%;
+}
+
+.add-plnt-btn {
+    background-color: rgb(110, 199, 133);
+    border: none;
+    z-index: 11;
+    position: sticky;
+    top: 50%;
+    transform: translate(0%, -50%);
+}
+
+.add-plnt-btn:hover {
+    background-color: rgba(110, 199, 134, 0.7);
+}
